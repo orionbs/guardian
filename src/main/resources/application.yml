@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Guardian
+  mvc:
+    throw-exception-if-no-handler-found: true
+logging:
+  level:
+    fr.orionbs.guardian: info
+
+server:
+  port: 8080
