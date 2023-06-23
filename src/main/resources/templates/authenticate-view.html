@@ -1,14 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="#{authentication-view.title}"></title>
+    <title th:text="#{authenticate-view.title}"></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/root.css}">
     <link rel="icon" th:href="@{/img/favicon.ico}"/>
 </head>
-<body>
+<body class="w-full h-max py-8 px-4 md:p-8  relative flex flex-col bg-neutral-50 dark:bg-neutral-950">
+<main class="w-full sm:w-[500px] h-max mx-auto relative flex flex-col justify-center items-center gap-12">
+    <img class="w-12 h-max relative dark:hidden"
+         th:src="@{/img/logo_neutral_950.png}"
+         th:alt="#{authenticate-view.logo.alt}">
+    <img class="w-12 h-max relative hidden dark:block"
+         th:src="@{/img/logo_neutral_50.png}"
+         th:alt="#{authenticate-view.logo.alt}">
+    <header class="w-full h-max relative flex flex-col justify-center items-center gap-1.5">
+        <h1 class="w-auto text-2xl font-bold text-neutral-950 dark:text-neutral-50"
+            th:text="#{authenticate-view.header.title}"></h1>
+        <section class="w-auto h-max relative flex flex-row flex-wrap gap-2">
+            <h2 class="w-max text-sm font-normal text-neutral-500 dark:text-neutral-500"
+                th:text="#{authenticate-view.header.section.text}"></h2>
+            <a class="w-max text-sm font-semibold text-lime-600 dark:text-lime-400 hover:text-lime-500"
+               th:text="#{authenticate-view.header.section.link}"
+               th:href="@{/register}"></a>
+        </section>
+    </header>
+    <section class="w-full h-max p-4 relative flex flex-col justify-start items-start gap-2 bg-red-50 dark:bg-red-950 rounded-lg"
+            th:if="${errors != null}">
+        <h3 class="w-auto text-sm font-medium text-red-800 dark:text-red-200"
+            th:text="#{authenticate-view.section.error.title(${errors.size()})}"></h3>
+        <li class="w-auto text-sm font-normal text-red-700 dark:text-red-300"
+            th:each="error : ${errors}"
+            th:text="${error}"></li>
+    </section>
+    <form class="w-full h-max relative flex flex-col justify-center items-center gap-6"
+          th:action="@{/authenticate}" method="post">
+        <fieldset class="w-full h-max relative flex flex-col justify-start items-start gap-1.5">
+            <label class="w-auto text-sm font-medium text-neutral-950 dark:text-neutral-50"
+                   for="email"
+                   th:text="#{authenticate-view.form.email.label}"></label>
+            <input class="w-full h-max py-2 px-3 relative flex flex-row justify-start items-center gap-1
+                          bg-neutral-50 dark:bg-neutral-950
+                          rounded-lg ring-inset ring-1 ring-neutral-300 dark:ring-neutral-700
+                          shadow-sm shadow-neutral-100 dark:shadow-neutral-900
+                          focus:ring-2 focus:ring-lime-600 dark:focus:ring-lime-400
+                          text-sm font-normal text-neutral-900 dark:text-neutral-100"
+                   type="email" id="email" name="email" autocomplete="email"
+                   th:placeholder="#{authenticate-view.form.email.placeholder}">
+        </fieldset>
+        <fieldset class="w-full h-max relative flex flex-col justify-start items-start gap-1.5">
+            <label class="w-auto text-sm font-medium text-neutral-950 dark:text-neutral-50"
+                   for="password"
+                   th:text="#{authenticate-view.form.password.label}"></label>
+            <input class="w-full h-max py-2 px-3 relative flex flex-row justify-start items-center gap-1
+                          bg-neutral-50 dark:bg-neutral-950
+                          rounded-lg ring-inset ring-1 ring-neutral-300 dark:ring-neutral-700
+                          shadow-sm shadow-neutral-100 dark:shadow-neutral-900
+                          focus:ring-2 focus:ring-lime-600 dark:focus:ring-lime-400
+                          text-sm font-normal text-neutral-900 dark:text-neutral-100"
+                   type="password" id="password" name="password" autocomplete="current-password"
+                   th:placeholder="#{authenticate-view.form.password.placeholder}">
+        </fieldset>
+        <button class="w-full h-max py-2 px-3 relative flex flex-row justify-center items-center gap-1
+                       bg-lime-600 dark:bg-lime-400 rounded-md
+                       hover:bg-lime-500 hover:focus:bg-lime-500
+                       focus:bg-lime-500 dark:focus:bg-lime-500
+                       text-sm font-semibold text-neutral-50 dark:text-neutral-950"
+                type="submit"
+                th:text="#{authenticate-view.form.button.text}"></button>
+    </form>
+    <section class="w-auto h-max relative flex flex-row flex-wrap gap-2">
+        <h2 class="w-max text-sm font-normal text-neutral-500 dark:text-neutral-500"
+            th:text="#{authenticate-view.section.password.text}"></h2>
+        <a class="w-max text-sm font-semibold text-lime-600 dark:text-lime-400 hover:text-lime-500"
+           th:text="#{authenticate-view.section.password.link}"
+           th:href="@{/forgot-password}"></a>
+    </section>
+</main>
 </body>
 </html>

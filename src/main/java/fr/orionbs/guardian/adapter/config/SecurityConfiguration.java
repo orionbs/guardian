@@ -26,7 +26,7 @@ public class SecurityConfiguration {
             authorizationManagerRequestMatcherRegistry.requestMatchers("/css/**").permitAll();
             authorizationManagerRequestMatcherRegistry.requestMatchers("/js/**").permitAll();
             authorizationManagerRequestMatcherRegistry.requestMatchers("/img/favicon.ico").permitAll();
-
+            authorizationManagerRequestMatcherRegistry.requestMatchers("/img/logo**").permitAll();
         });
 
         httpSecurity.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {

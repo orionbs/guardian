@@ -10,7 +10,7 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import java.util.Locale;
 
 @Configuration
-public class InternationalizationConfiguration {
+public class I18nMessageConfiguration {
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -19,18 +19,10 @@ public class InternationalizationConfiguration {
         return acceptHeaderLocaleResolver;
     }
 
-    @Bean
-    public MessageSource messageSource()  {
+    @Bean(name = "messageSource")
+    public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
         reloadableResourceBundleMessageSource.setBasename("classpath:language/messages");
-        reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
-        return reloadableResourceBundleMessageSource;
-    }
-
-    @Bean
-    public MessageSource exceptionMessageSource() {
-        ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
-        reloadableResourceBundleMessageSource.setBasename("classpath:language/exceptions");
         reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
         return reloadableResourceBundleMessageSource;
     }
